@@ -277,7 +277,7 @@ const RoutineTable = () => {
                     {item.rooms.map((room, roomIndex) => (
                       <div
                         key={roomIndex}
-                        className={`inline-block p-1 rounded ${getRoomColor(
+                        className={`inline-block p-1 rounded-full ${getRoomColor(
                           room.capacity,
                           highestCapacity,
                           lowestCapacity
@@ -291,7 +291,7 @@ const RoutineTable = () => {
                     {item.rooms.map((room, roomIndex) => (
                       <div
                         key={roomIndex}
-                        className={`inline-block p-1 rounded ${getRoomColor(
+                        className={`inline-block p-2 rounded-full ${getRoomColor(
                           room.capacity,
                           highestCapacity,
                           lowestCapacity
