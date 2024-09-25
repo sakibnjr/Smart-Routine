@@ -188,10 +188,10 @@ const RoutineTable = () => {
         transition={{ duration: 0.8 }}
       >
         {/* Icon with spinning effect */}
-        <motion.div className="flex">
-          <h2 className="text-xl md:text-2xl font-semibold text-white">
-            --- Upcoming Exam ---
-            <span className="text-rose-500 ml-2">
+        <motion.div className="flex justify-center">
+          <h2 className="text-xl md:text-4xl text-white">
+            --- Upcoming Exam --- <br />
+            <span className="text-rose-500 ml-2 font-bold">
               {routineData[currentExamIndex].course}
             </span>
           </h2>
