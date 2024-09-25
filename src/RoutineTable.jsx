@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useMediaQuery } from "react-responsive";
-import { FaQuestionCircle, FaDownload } from "react-icons/fa"; // Importing icons from React Icons
+import { FaQuestionCircle } from "react-icons/fa"; // Importing icons from React Icons
 
 const RoutineTable = () => {
   const routineData = [
@@ -113,6 +113,17 @@ const RoutineTable = () => {
     window.open(link, "_blank"); // Open the link in a new tab
   };
 
+  // Function to determine the room color based on capacity
+  const getRoomColor = (capacity, highestCapacity, lowestCapacity) => {
+    if (capacity === highestCapacity) {
+      return "bg-green-400"; // Green for highest capacity
+    }
+    if (capacity === lowestCapacity) {
+      return "bg-red-400"; // Red for lowest capacity
+    }
+    return "bg-blue-400"; // Blue for medium capacity
+  };
+
   return (
     <div className="container mx-auto p-6">
       {/* Heading */}
@@ -160,49 +171,81 @@ const RoutineTable = () => {
             </tr>
           </thead>
           <tbody>
-            {routineData.map((item, index) => (
-              <motion.tr
-                key={index}
-                whileHover={{ scale: 1.02 }}
-                className={`border-b transition-all duration-500 ${
-                  index % 2 === 0 ? "bg-white" : "bg-gray-100"
-                } `}
-              >
-                <td className="p-2 md:p-4 text-sm md:text-base">{item.date}</td>
-                <td className="p-2 md:p-4 text-sm md:text-base font-semibold text-blue-800">
-                  {item.course}
-                </td>
-                <td className="p-2 md:p-4 text-sm md:text-base">{item.time}</td>
-                <td className="p-2 md:p-4 text-sm md:text-base">
-                  {item.rooms.map((room, roomIndex) => (
-                    <div key={roomIndex}>{room.number}</div>
-                  ))}
-                </td>
-                <td className="p-2 md:p-4 text-sm md:text-base">
-                  {item.rooms.map((room, roomIndex) => (
-                    <div key={roomIndex}>{room.capacity}</div>
-                  ))}
-                </td>
-                <td className="p-2 md:p-4 space-x-2">
-                  {/* Previous Questions Button */}
-                  <button
-                    className="btn btn-sm btn-accent"
-                    onClick={() =>
-                      handlePreviousQuestionsClick(item.previousQuestionsLink)
-                    } // Pass the link directly
-                  >
-                    {isMobile ? <FaQuestionCircle /> : "Previous Questions"}
-                  </button>
-                  {/* Download All Slides Button */}
-                  {/* <button className="btn btn-sm btn-accent">
-                    {isMobile ? <FaDownload /> : "Download Slides"}
-                  </button> */}
-                </td>
-              </motion.tr>
-            ))}
+            {routineData.map((item, index) => {
+              // Calculate highest and lowest capacities for room highlighting
+              const capacities = item.rooms.map((room) => room.capacity);
+              const highestCapacity = Math.max(...capacities);
+              const lowestCapacity = Math.min(...capacities);
+
+              return (
+                <motion.tr
+                  key={index}
+                  whileHover={{ scale: 1.02 }}
+                  className={`border-b transition-all duration-500 ${
+                    index % 2 === 0 ? "bg-white" : "bg-gray-100"
+                  } `}
+                >
+                  <td className="p-2 md:p-4 text-sm md:text-base">
+                    {item.date}
+                  </td>
+                  <td className="p-2 md:p-4 text-sm md:text-base font-semibold text-blue-800">
+                    {item.course}
+                  </td>
+                  <td className="p-2 md:p-4 text-sm md:text-base">
+                    {item.time}
+                  </td>
+                  <td className="p-2 md:p-4 text-sm md:text-base">
+                    {item.rooms.map((room, roomIndex) => (
+                      <div
+                        key={roomIndex}
+                        className={`inline-block p-1 rounded ${getRoomColor(
+                          room.capacity,
+                          highestCapacity,
+                          lowestCapacity
+                        )}`}
+                      >
+                        {room.number}
+                      </div>
+                    ))}
+                  </td>
+                  <td className="p-2 md:p-4">
+                    {item.rooms.map((room, roomIndex) => (
+                      <div
+                        key={roomIndex}
+                        className={`inline-block p-1 rounded ${getRoomColor(
+                          room.capacity,
+                          highestCapacity,
+                          lowestCapacity
+                        )}`}
+                      >
+                        {room.capacity}
+                      </div>
+                    ))}
+                  </td>
+                  <td className="p-2 md:p-4">
+                    <button
+                      className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                      onClick={() =>
+                        handlePreviousQuestionsClick(item.previousQuestionsLink)
+                      }
+                    >
+                      Previous Questions
+                    </button>
+                  </td>
+                </motion.tr>
+              );
+            })}
           </tbody>
         </table>
       </motion.div>
+
+      <a
+        href="https://drive.google.com/uc?id=1AQ0bNGREqF2gJbGV7_lbX1YOTp-brm9n
+        "
+        className="flex justify-center items-center btn btn-outline my-4"
+      >
+        Download Routine
+      </a>
     </div>
   );
 };
