@@ -8,7 +8,11 @@ const RoutineTable = () => {
     {
       date: "28th September",
       course: "Compiler Design",
-      room: "TBA",
+      rooms: [
+        { number: "208", capacity: 18 },
+        { number: "213", capacity: 24 },
+        { number: "216", capacity: 10 },
+      ],
       time: "2:00 PM",
       examDate: new Date("2024-09-28T14:00:00"),
       previousQuestionsLink:
@@ -17,7 +21,11 @@ const RoutineTable = () => {
     {
       date: "30th September",
       course: "Software Engineering",
-      room: "TBA",
+      rooms: [
+        { number: "208", capacity: 18 },
+        { number: "213", capacity: 24 },
+        { number: "216", capacity: 10 },
+      ],
       time: "2:00 PM",
       examDate: new Date("2024-09-30T14:00:00"),
       previousQuestionsLink:
@@ -26,7 +34,11 @@ const RoutineTable = () => {
     {
       date: "2nd October",
       course: "Computer Architecture",
-      room: "TBA",
+      rooms: [
+        { number: "208", capacity: 18 },
+        { number: "213", capacity: 24 },
+        { number: "216", capacity: 10 },
+      ],
       time: "2:00 PM",
       examDate: new Date("2024-10-02T14:00:00"),
       previousQuestionsLink:
@@ -35,7 +47,11 @@ const RoutineTable = () => {
     {
       date: "6th October",
       course: "Information Security",
-      room: "TBA",
+      rooms: [
+        { number: "305", capacity: 16 },
+        { number: "306", capacity: 24 },
+        { number: "307", capacity: 13 },
+      ],
       time: "2:00 PM",
       examDate: new Date("2024-10-06T14:00:00"),
       previousQuestionsLink:
@@ -44,7 +60,11 @@ const RoutineTable = () => {
     {
       date: "9th October",
       course: "Big Data and IoT",
-      room: "TBA",
+      rooms: [
+        { number: "208", capacity: 18 },
+        { number: "213", capacity: 24 },
+        { number: "216", capacity: 10 },
+      ],
       time: "11:30 AM",
       examDate: new Date("2024-10-09T11:30:00"),
       previousQuestionsLink:
@@ -135,6 +155,7 @@ const RoutineTable = () => {
               <th className="p-2 md:p-4">Course Name</th>
               <th className="p-2 md:p-4">Time</th>
               <th className="p-2 md:p-4">Room Number</th>
+              <th className="p-2 md:p-4">Capacity</th>
               <th className="p-2 md:p-4">Actions</th>
             </tr>
           </thead>
@@ -152,7 +173,16 @@ const RoutineTable = () => {
                   {item.course}
                 </td>
                 <td className="p-2 md:p-4 text-sm md:text-base">{item.time}</td>
-                <td className="p-2 md:p-4 text-sm md:text-base">TBA</td>
+                <td className="p-2 md:p-4 text-sm md:text-base">
+                  {item.rooms.map((room, roomIndex) => (
+                    <div key={roomIndex}>{room.number}</div>
+                  ))}
+                </td>
+                <td className="p-2 md:p-4 text-sm md:text-base">
+                  {item.rooms.map((room, roomIndex) => (
+                    <div key={roomIndex}>{room.capacity}</div>
+                  ))}
+                </td>
                 <td className="p-2 md:p-4 space-x-2">
                   {/* Previous Questions Button */}
                   <button
@@ -173,15 +203,6 @@ const RoutineTable = () => {
           </tbody>
         </table>
       </motion.div>
-
-      <a
-        href="https://drive.google.com/uc?id=14r3ItldmuHJBhCX8O2o2sb9wLoeYFel9"
-        className="flex justify-center items-center btn btn-outline my-4"
-      >
-        Download Routine
-      </a>
-
-      {/* <Button /> */}
     </div>
   );
 };
