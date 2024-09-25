@@ -4,6 +4,7 @@ import { LuDownload } from "react-icons/lu"; // Importing icons from React Icons
 import { FiSun, FiMoon } from "react-icons/fi"; // Importing sun and moon icons
 import { GoQuestion } from "react-icons/go";
 import { GrChapterPrevious } from "react-icons/gr";
+import { FaCalendarAlt, FaClock, FaBook } from "react-icons/fa";
 
 const RoutineTable = () => {
   const [theme, setTheme] = useState("light"); // State for theme
@@ -161,6 +162,7 @@ const RoutineTable = () => {
         >
           Exam Routine
         </motion.h1>
+
         {/* Theme Toggle Button */}
         <button
           onClick={toggleTheme}
@@ -179,20 +181,42 @@ const RoutineTable = () => {
         </button>
       </div>
 
-      {/* Timer Section */}
       <motion.div
         className="text-center mb-8 p-6 rounded-lg shadow-lg bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600"
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.8 }}
       >
-        <h2 className="text-xl md:text-2xl font-semibold">
-          Next Exam : {routineData[currentExamIndex].course}
-        </h2>
-        <p className="text-lg md:text-xl mt-2">
-          Time Remaining : {timeRemaining.days}d {timeRemaining.hours}h{" "}
-          {timeRemaining.minutes}m {timeRemaining.seconds}s
-        </p>
+        {/* Icon with spinning effect */}
+        <motion.div className="flex">
+          <h2 className="text-xl md:text-2xl font-semibold text-white">
+            --- Upcoming Exam ---
+            <span className="text-rose-500 ml-2">
+              {routineData[currentExamIndex].course}
+            </span>
+          </h2>
+        </motion.div>
+
+        {/* Countdown text with pulsating animation */}
+        <motion.p
+          className="text-lg md:text-xl mt-2 text-white flex justify-center items-center"
+          animate={{ scale: [1, 1.1, 1], opacity: [0.9, 1, 0.9] }}
+          // transition={{ repeat: Infinity, duration: 2 }}
+        >
+          <FaClock size={30} className="mr-2 text-yellow-300" />
+          {timeRemaining.days}d {timeRemaining.hours}h {timeRemaining.minutes}m{" "}
+          {timeRemaining.seconds}s
+        </motion.p>
+
+        {/* Animated Book Icon with Bouncing Effect */}
+        <motion.div
+          className="flex justify-center items-center mt-4"
+          animate={{ y: [0, -10, 0] }}
+          transition={{ repeat: Infinity, duration: 1.5 }}
+        >
+          <FaBook size={30} className="text-green-300 mr-2" />
+          <p className="text-white">Prepare Well!</p>
+        </motion.div>
       </motion.div>
 
       {/* Table */}
