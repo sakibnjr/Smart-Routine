@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useMediaQuery } from "react-responsive";
-import { FaQuestionCircle } from "react-icons/fa"; // Importing icons from React Icons
+import { LuDownload } from "react-icons/lu"; // Importing icons from React Icons
 
 const RoutineTable = () => {
   const routineData = [
@@ -222,9 +222,9 @@ const RoutineTable = () => {
                       </div>
                     ))}
                   </td>
-                  <td className="p-2 md:p-4">
+                  <td className="p-1 md:p-4">
                     <button
-                      className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                      className="btn btn-accent"
                       onClick={() =>
                         handlePreviousQuestionsClick(item.previousQuestionsLink)
                       }
@@ -245,6 +245,7 @@ const RoutineTable = () => {
         className="flex justify-center items-center btn btn-outline my-4"
       >
         Download Routine
+        <LuDownload />
       </a>
     </div>
   );
