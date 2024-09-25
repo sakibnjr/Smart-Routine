@@ -240,7 +240,7 @@ const RoutineTable = () => {
       </motion.div>
 
       <a
-        href="https://drive.google.com/uc?id=1AQ0bNGREqF2gJbGV7_lbX1YOTp-brm9n
+        href="https://drive.google.com/uc?id=1J5025fwMkgOwskJ3rZo0kyIFHhstfaba
         "
         className="flex justify-center items-center btn btn-outline my-4"
       >
